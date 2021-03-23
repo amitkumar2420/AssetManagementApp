@@ -28,4 +28,55 @@ public class Asset {
 	private AssetType type;
 	
 	private String manufacturer;
+
+	
+	public Asset() {
+		super();
+	}
+
+	public Asset(Warehouse warehouse, String model, AssetType type, String manufacturer) {
+		super();
+		this.warehouse = warehouse;
+		this.model = model;
+		this.type = type;
+		this.manufacturer = manufacturer;
+	}
+
+	public Warehouse getWarehouse() {
+		return warehouse;
+	}
+
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public AssetType getType() {
+		return type;
+	}
+
+	public void setType(AssetType type) {
+		this.type = type;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public Long getAssetId() {
+		return assetId;
+	}
+	
+	
 }

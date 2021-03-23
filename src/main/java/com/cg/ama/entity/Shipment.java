@@ -35,4 +35,83 @@ public class Shipment {
 	
 	@Column(name="deivery_id")
 	private Date deliveryDate;
+
+	
+	public Shipment() {
+		super();
+	}
+
+	public Shipment(long assetId, long userId, ShipmentStatus status, long sourceWhId, long destWhId, Date shipmentDate,
+			Date deliveryDate) {
+		super();
+		this.assetId = assetId;
+		this.userId = userId;
+		this.status = status;
+		this.sourceWhId = sourceWhId;
+		this.destWhId = destWhId;
+		this.shipmentDate = shipmentDate;
+		this.deliveryDate = deliveryDate;
+	}
+
+	public long getShipmentId() {
+		return shipmentId;
+	}
+
+	public void setShipmentId(long shipmentId) {
+		this.shipmentId = shipmentId;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public ShipmentStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ShipmentStatus status) {
+		this.status = status;
+	}
+
+	public long getSourceWhId() {
+		return sourceWhId;
+	}
+
+	public void setSourceWhId(long sourceWhId) {
+		this.sourceWhId = sourceWhId;
+	}
+
+	public long getDestWhId() {
+		return destWhId;
+	}
+
+	public void setDestWhId(long destWhId) {
+		this.destWhId = destWhId;
+	}
+
+	public Date getShipmentDate() {
+		return shipmentDate;
+	}
+
+	public void setShipmentDate(Date shipmentDate) {
+		this.shipmentDate = shipmentDate;
+	}
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public long getAssetId() {
+		return assetId;
+	}
+	
+	
 }
