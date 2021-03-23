@@ -6,13 +6,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Shipment {
+@Table(name="shipments")
+public class ShipmentEntity {
 	
 	@Id
 	@Column(name="shipment_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long shipmentId;
 	
 	@Column(name="asset_id")
@@ -33,15 +38,15 @@ public class Shipment {
 	@Column(name="ship_date")
 	private Date shipmentDate;
 	
-	@Column(name="deivery_id")
+	@Column(name="deivery_date")
 	private Date deliveryDate;
 
 	
-	public Shipment() {
+	public ShipmentEntity() {
 		super();
 	}
 
-	public Shipment(long assetId, long userId, ShipmentStatus status, long sourceWhId, long destWhId, Date shipmentDate,
+	public ShipmentEntity(long assetId, long userId, ShipmentStatus status, long sourceWhId, long destWhId, Date shipmentDate,
 			Date deliveryDate) {
 		super();
 		this.assetId = assetId;

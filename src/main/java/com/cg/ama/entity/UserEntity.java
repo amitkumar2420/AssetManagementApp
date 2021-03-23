@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class User {
+public class UserEntity {
 	
 	@Id
 	@Column(name="user_id")
@@ -28,11 +28,11 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserType userType;
 	
-	public User() {
+	public UserEntity() {
 		super();
 	}
 
-	public User(String userName, String userPassword, UserType userType) {
+	public UserEntity(String userName, String userPassword, UserType userType) {
 		super();
 		this.userName = userName;
 		this.userPassword = userPassword;

@@ -2,6 +2,7 @@ package com.cg.ama.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -9,9 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Warehouse {
+@Table(name="warehouses")
+public class WarehouseEntity {
 	
 	@Id
 	@Column(name="wh_id")
@@ -22,17 +25,17 @@ public class Warehouse {
 	private long mgrId;
 	
 	@Embedded
-	private Address address;
+	private AddressEntity address;
 	
-	@OneToMany(mappedBy="warehouse")
-	private List<Asset> assets;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="warehouse")
+	private List<AssetEntity> assets;
 	
 
-	public Warehouse() {
+	public WarehouseEntity() {
 		super();
 	}
 
-	public Warehouse(long mgrId, Address address, List<Asset> assets) {
+	public WarehouseEntity(long mgrId, AddressEntity address, List<AssetEntity> assets) {
 		super();
 		this.mgrId = mgrId;
 		this.address = address;
@@ -55,19 +58,19 @@ public class Warehouse {
 		this.mgrId = mgrId;
 	}
 
-	public Address getAddress() {
+	public AddressEntity getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(AddressEntity address) {
 		this.address = address;
 	}
 
-	public List<Asset> getAssets() {
+	public List<AssetEntity> getAssets() {
 		return assets;
 	}
 
-	public void setAssets(List<Asset> assets) {
+	public void setAssets(List<AssetEntity> assets) {
 		this.assets = assets;
 	} 
 	

@@ -1,11 +1,13 @@
 package com.cg.ama.entity;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Embeddable
-public class Address {
+@Table(name="addresses")
+public class AddressEntity {
 	
 	@NotNull
 	@Size(max=50)
@@ -22,11 +24,11 @@ public class Address {
 	@Size(max=50)
 	private String country;
 
-	public Address() {
+	public AddressEntity() {
 		super();
 	}
 
-	public Address(@NotNull @Size(max = 50) String location, @Size(max = 50) String subLocation,
+	public AddressEntity(@NotNull @Size(max = 50) String location, @Size(max = 50) String subLocation,
 			@NotNull @Size(max = 50) String state, @NotNull @Size(max = 50) String country) {
 		super();
 		this.location = location;

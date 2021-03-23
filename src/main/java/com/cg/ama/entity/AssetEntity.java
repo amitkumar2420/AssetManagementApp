@@ -9,9 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Asset {
+@Table(name="assets")
+public class AssetEntity {
 	
 	@Id
 	@Column(name="asset_id", unique=true)
@@ -20,7 +22,7 @@ public class Asset {
 
 	@ManyToOne
 	@JoinColumn(name="wh_id")
-	private Warehouse warehouse;
+	private WarehouseEntity warehouse;
 	
 	private String model;
 	
@@ -30,11 +32,11 @@ public class Asset {
 	private String manufacturer;
 
 	
-	public Asset() {
+	public AssetEntity() {
 		super();
 	}
 
-	public Asset(Warehouse warehouse, String model, AssetType type, String manufacturer) {
+	public AssetEntity(WarehouseEntity warehouse, String model, AssetType type, String manufacturer) {
 		super();
 		this.warehouse = warehouse;
 		this.model = model;
@@ -42,11 +44,11 @@ public class Asset {
 		this.manufacturer = manufacturer;
 	}
 
-	public Warehouse getWarehouse() {
+	public WarehouseEntity getWarehouse() {
 		return warehouse;
 	}
 
-	public void setWarehouse(Warehouse warehouse) {
+	public void setWarehouse(WarehouseEntity warehouse) {
 		this.warehouse = warehouse;
 	}
 
