@@ -1,7 +1,6 @@
 package com.cg.ama.entity;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,18 +35,33 @@ public class ShipmentEntity {
 	private long destWhId;
 	
 	@Column(name="ship_date")
-	private Date shipmentDate;
+	private LocalDate shipmentDate;
 	
 	@Column(name="delivery_date")
-	private Date deliveryDate;
+	private LocalDate deliveryDate;
 
 	
 	public ShipmentEntity() {
 		super();
 	}
+	
+	
+	public ShipmentEntity(long shipmentId, long assetId, long userId, ShipmentStatus status, long sourceWhId,
+			long destWhId, LocalDate shipmentDate, LocalDate deliveryDate) {
+		super();
+		this.shipmentId = shipmentId;
+		this.assetId = assetId;
+		this.userId = userId;
+		this.status = status;
+		this.sourceWhId = sourceWhId;
+		this.destWhId = destWhId;
+		this.shipmentDate = shipmentDate;
+		this.deliveryDate = deliveryDate;
+	}
 
-	public ShipmentEntity(long assetId, long userId, ShipmentStatus status, long sourceWhId, long destWhId, Date shipmentDate,
-			Date deliveryDate) {
+
+	public ShipmentEntity(long assetId, long userId, ShipmentStatus status, long sourceWhId, long destWhId, LocalDate shipmentDate,
+			LocalDate deliveryDate) {
 		super();
 		this.assetId = assetId;
 		this.userId = userId;
@@ -98,19 +112,19 @@ public class ShipmentEntity {
 		this.destWhId = destWhId;
 	}
 
-	public Date getShipmentDate() {
+	public LocalDate getShipmentDate() {
 		return shipmentDate;
 	}
 
-	public void setShipmentDate(Date shipmentDate) {
+	public void setShipmentDate(LocalDate shipmentDate) {
 		this.shipmentDate = shipmentDate;
 	}
 
-	public Date getDeliveryDate() {
+	public LocalDate getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(Date deliveryDate) {
+	public void setDeliveryDate(LocalDate deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 

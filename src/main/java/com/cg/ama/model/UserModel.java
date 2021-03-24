@@ -19,10 +19,22 @@ public class UserModel {
 	@NotBlank(message="user type cannot be blank")
 	private String userType;
 
-	@Override
-	public String toString() {
-		return "UserModel []";
+	public UserModel() {
+		super();
 	}
+	
+	
+	public UserModel(long userId,
+			@NotNull(message = "user name cannot be null") @NotBlank(message = "user name cannot be blank") String userName,
+			@NotNull(message = "user password cannot be null") @NotBlank(message = "user password cannot be blank") String userPassword,
+			@NotNull(message = "user type cannot be null") @NotBlank(message = "user type cannot be blank") String userType) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.userType = userType;
+	}
+
 
 	public UserModel(
 			@NotNull(message = "user name cannot be null") @NotBlank(message = "user name cannot be blank") String userName,
@@ -62,6 +74,9 @@ public class UserModel {
 		return userId;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "UserModel []";
+	}
 	
 }

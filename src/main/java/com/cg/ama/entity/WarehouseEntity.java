@@ -34,6 +34,21 @@ public class WarehouseEntity {
 	public WarehouseEntity() {
 		super();
 	}
+	
+	
+	public WarehouseEntity(long whId, long mgrId, AddressEntity address) {
+		super();
+		this.whId = whId;
+		this.mgrId = mgrId;
+		this.address = address;
+	}
+
+
+	public WarehouseEntity(long mgrId, AddressEntity address) {
+		super();
+		this.mgrId = mgrId;
+		this.address = address;
+	}
 
 	public WarehouseEntity(long mgrId, AddressEntity address, List<AssetEntity> assets) {
 		super();

@@ -35,6 +35,17 @@ public class AssetEntity {
 	public AssetEntity() {
 		super();
 	}
+	
+	
+	public AssetEntity(Long assetId, WarehouseEntity warehouse, String model, AssetType type, String manufacturer) {
+		super();
+		this.assetId = assetId;
+		this.warehouse = warehouse;
+		this.model = model;
+		this.type = type;
+		this.manufacturer = manufacturer;
+	}
+
 
 	public AssetEntity(WarehouseEntity warehouse, String model, AssetType type, String manufacturer) {
 		super();
