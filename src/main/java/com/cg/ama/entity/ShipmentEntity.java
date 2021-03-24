@@ -38,7 +38,7 @@ public class ShipmentEntity {
 	@Column(name="ship_date")
 	private Date shipmentDate;
 	
-	@Column(name="deivery_date")
+	@Column(name="delivery_date")
 	private Date deliveryDate;
 
 	
