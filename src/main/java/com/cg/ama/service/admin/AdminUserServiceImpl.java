@@ -1,4 +1,4 @@
-package com.cg.ama.service;
+package com.cg.ama.service.admin;
 
 import java.util.List;
 import java.util.stream.Collectors;

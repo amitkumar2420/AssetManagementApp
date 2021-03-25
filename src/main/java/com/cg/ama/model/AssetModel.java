@@ -8,7 +8,6 @@ public class AssetModel {
 	private Long assetId;
 	
 	@NotNull(message="Warehouse ID cannot be null")	
-	@NotBlank(message="Warehouse ID cannot be blank")
 	private WarehouseModel warehouse;
 	
 	@NotNull(message="Asset ID cannot be null")	
@@ -27,11 +26,7 @@ public class AssetModel {
 		super();
 	}
 	
-	public AssetModel(Long assetId,
-			@NotNull(message = "Warehouse ID cannot be null") @NotBlank(message = "Warehouse ID cannot be blank") WarehouseModel warehouse,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String model,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String type,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String manufacturer) {
+	public AssetModel(Long assetId, WarehouseModel warehouse, String model, String type, String manufacturer) {
 		super();
 		this.assetId = assetId;
 		this.warehouse = warehouse;
@@ -41,11 +36,7 @@ public class AssetModel {
 	}
 
 
-	public AssetModel(
-			@NotNull(message = "Warehouse ID cannot be null") @NotBlank(message = "Warehouse ID cannot be blank") WarehouseModel warehouse,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String model,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String type,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String manufacturer) {
+	public AssetModel(WarehouseModel warehouse, String model, String type, String manufacturer) {
 		super();
 		this.warehouse = warehouse;
 		this.model = model;

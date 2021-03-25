@@ -1,4 +1,4 @@
-package com.cg.ama.service;
+package com.cg.ama.service.admin;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +68,7 @@ public class AdminShipmentServiceImpl implements IAdminShipmentService {
 			throw new ShipmentNotFoundException("No Shipment present with the given ID");
 		}
 		shipmentRepo.deleteById(shipmentId);
-		return "User Deleted";
+		return "Shipment Deleted";
 	}
 
 

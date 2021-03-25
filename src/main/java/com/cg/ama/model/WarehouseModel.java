@@ -1,17 +1,14 @@
 package com.cg.ama.model;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class WarehouseModel {
 	
 	private long whId;
 	
-	@NotEmpty(message="Warehouse manager ID cannot be empty")
     @NotNull(message="Warehouse manager ID  cannot be omitted")
 	private long mgrId;
 	
-	@NotEmpty(message="address cannot be empty")
     @NotNull(message="address  cannot be omitted")
 	private AddressModel address;
 

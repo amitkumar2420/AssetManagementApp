@@ -30,10 +30,10 @@ import com.cg.ama.model.AssetModel;
 import com.cg.ama.model.ShipmentModel;
 import com.cg.ama.model.UserModel;
 import com.cg.ama.model.WarehouseModel;
-import com.cg.ama.service.IAdminAssetService;
-import com.cg.ama.service.IAdminShipmentService;
-import com.cg.ama.service.IAdminUserService;
-import com.cg.ama.service.IAdminWarehouseService;
+import com.cg.ama.service.admin.IAdminAssetService;
+import com.cg.ama.service.admin.IAdminShipmentService;
+import com.cg.ama.service.admin.IAdminUserService;
+import com.cg.ama.service.admin.IAdminWarehouseService;
 
 @RestController
 @CrossOrigin

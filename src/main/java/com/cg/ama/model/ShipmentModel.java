@@ -10,11 +10,9 @@ public class ShipmentModel {
 	private Long shipmentId;
 	
 	@NotNull(message="Asset ID cannot be null")	
-	@NotBlank(message="Asset ID cannot be blank")
 	private Long assetId;
 	
 	@NotNull(message="User ID cannot be null")	
-	@NotBlank(message="user ID cannot be blank")
 	private Long userId;
 	
 	@NotNull(message="Status cannot be null")	
@@ -22,19 +20,15 @@ public class ShipmentModel {
 	private String status;
 	
 	@NotNull(message="Source Warehouse ID cannot be null")	
-	@NotBlank(message="Source Warehouse ID cannot be blank")
 	private Long sourceWhId;
 	
 	@NotNull(message="Destination Warehouse ID cannot be null")	
-	@NotBlank(message="Destination Warehouse ID cannot be blank")
 	private Long destWhId;
 	
 	@NotNull(message="Shipment Date cannot be null")	
-	@NotBlank(message="Shipment Date cannot be blank")
 	private LocalDate shipmentDate;
 	
 	@NotNull(message="Delivery Date cannot be null")	
-	@NotBlank(message="Delivery Date cannot be blank")
 	private LocalDate deliveryDate;
 	
 	public ShipmentModel() {

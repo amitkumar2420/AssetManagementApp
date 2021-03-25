@@ -1,4 +1,4 @@
-package com.cg.ama.service;
+package com.cg.ama.service.admin;
 
 import org.springframework.stereotype.Service;
 

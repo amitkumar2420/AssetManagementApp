@@ -1,4 +1,4 @@
-package com.cg.ama.service;
+package com.cg.ama.service.admin;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +69,7 @@ public class AdminWarehouseServiceImpl implements IAdminWarehouseService {
 			throw new WarehouseNotFoundException("No Warehouse present with the given ID");
 		}
 		warehouseRepo.deleteById(warehouseId);
-		return "User Deleted";
+		return "Warehouse Deleted";
 	}
 
 
