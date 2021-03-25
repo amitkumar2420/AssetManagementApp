@@ -24,10 +24,7 @@ public class UserModel {
 	}
 	
 	
-	public UserModel(long userId,
-			@NotNull(message = "user name cannot be null") @NotBlank(message = "user name cannot be blank") String userName,
-			@NotNull(message = "user password cannot be null") @NotBlank(message = "user password cannot be blank") String userPassword,
-			@NotNull(message = "user type cannot be null") @NotBlank(message = "user type cannot be blank") String userType) {
+	public UserModel(long userId, String userName, String userPassword, String userType) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -36,10 +33,7 @@ public class UserModel {
 	}
 
 
-	public UserModel(
-			@NotNull(message = "user name cannot be null") @NotBlank(message = "user name cannot be blank") String userName,
-			@NotNull(message = "user password cannot be null") @NotBlank(message = "user password cannot be blank") String userPassword,
-			@NotNull(message = "user type cannot be null") @NotBlank(message = "user type cannot be blank") String userType) {
+	public UserModel( String userName, String userPassword, String userType) {
 		super();
 		this.userName = userName;
 		this.userPassword = userPassword;
@@ -53,7 +47,8 @@ public class UserModel {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
+	
+//	@JsonIgnore
 	public String getUserPassword() {
 		return userPassword;
 	}

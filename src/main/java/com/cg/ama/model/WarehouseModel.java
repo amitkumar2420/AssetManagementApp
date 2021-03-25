@@ -20,18 +20,15 @@ public class WarehouseModel {
 		super();
 	}
 
-	public WarehouseModel(long whId,
-			@NotEmpty(message = "Warehouse manager ID cannot be empty") @NotNull(message = "Warehouse manager ID  cannot be omitted") long mgrId,
-			@NotEmpty(message = "address cannot be empty") @NotNull(message = "address  cannot be omitted") AddressModel address) {
+
+	public WarehouseModel(long whId, long mgrId, AddressModel address) {
 		super();
 		this.whId = whId;
 		this.mgrId = mgrId;
 		this.address = address;
 	}
 
-	public WarehouseModel(
-			@NotEmpty(message = "Warehouse manager ID cannot be empty") @NotNull(message = "Warehouse manager ID  cannot be omitted") long mgrId,
-			@NotEmpty(message = "address cannot be empty") @NotNull(message = "address  cannot be omitted") AddressModel address) {
+	public WarehouseModel(long mgrId, AddressModel address) {
 		super();
 		this.mgrId = mgrId;
 		this.address = address;

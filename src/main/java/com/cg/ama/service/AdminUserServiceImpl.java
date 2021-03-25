@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cg.ama.exception.DuplicateEntryException;
 import com.cg.ama.exception.UserNotFoundException;
 import com.cg.ama.model.UserModel;
@@ -23,11 +22,11 @@ public class AdminUserServiceImpl implements IAdminUserService {
 	private UserRepo userRepo;
 	
 	@Override
-	public UserModel getUserById(Long id) throws UserNotFoundException {
-		if (!userRepo.existsById(id)) {
+	public UserModel getUserById(Long userId) throws UserNotFoundException {
+		if (!userRepo.existsById(userId)) {
 			throw new UserNotFoundException("No user present with the given ID");
 		}
-		return parser.parse((userRepo.findById(id).orElse(null)));
+		return parser.parse((userRepo.findById(userId).orElse(null)));
 	}
 	
 	@Transactional
@@ -52,12 +51,24 @@ public class AdminUserServiceImpl implements IAdminUserService {
 	}
 
 	@Override
-	public String deleteUserById(Long id) throws UserNotFoundException {
-		if (!userRepo.existsById(id)) {
+	public String deleteUserById(Long userId) throws UserNotFoundException {
+		if (!userRepo.existsById(userId)) {
 			throw new UserNotFoundException("No user present with the given ID");
 		}
-		userRepo.deleteById(id);
+		userRepo.deleteById(userId);
 		return "User Deleted";
+	}
+	
+	@Transactional
+	@Override
+	public UserModel modifyUser(Long userId, UserModel userModel) throws UserNotFoundException {
+		if(userModel != null) {
+			if (!userRepo.existsById(userId)) {
+				throw new UserNotFoundException("User Not present in DB.");
+			}
+			userModel = parser.parse((userRepo.save(parser.parse(userModel))));
+		}
+		return userModel;
 	}
 
 }

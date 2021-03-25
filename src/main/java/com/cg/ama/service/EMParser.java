@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.ama.entity.AddressEntity;
 import com.cg.ama.entity.AssetEntity;
+import com.cg.ama.entity.AssetType;
 import com.cg.ama.entity.ShipmentEntity;
 import com.cg.ama.entity.ShipmentStatus;
 import com.cg.ama.entity.UserEntity;
@@ -44,12 +45,18 @@ public class EMParser {
 	
 	public AssetEntity parse(AssetModel source) {
 		return source==null?null:
-			new AssetEntity(source.getAssetId(), source.getWarehouse(), source.getModel(), source.getType(), source.getManufacturer());
+			new AssetEntity(source.getAssetId(), new WarehouseEntity(source.getWarehouse().getWhId(), source.getWarehouse().getMgrId(),
+					new AddressEntity(source.getWarehouse().getAddress().getLocation(),source.getWarehouse().getAddress().getSubLocation(),
+							source.getWarehouse().getAddress().getState(), source.getWarehouse().getAddress().getCountry()))
+							, source.getModel(), AssetType.valueOf(source.getType()), source.getManufacturer());
 	}
 	
 	public AssetModel parse(AssetEntity source) {
 		return source==null?null:
-			new AssetModel(source.getAssetId(), source.getWarehouse(), source.getModel(), source.getType(), source.getManufacturer());
+			new AssetModel(source.getAssetId(), new WarehouseModel(source.getWarehouse().getWhId(), source.getWarehouse().getMgrId(),
+					new AddressModel(source.getWarehouse().getAddress().getLocation(),source.getWarehouse().getAddress().getSubLocation(),
+							source.getWarehouse().getAddress().getState(), source.getWarehouse().getAddress().getCountry()))
+							, source.getModel(), String.valueOf(source.getType()), source.getManufacturer());
 	}
 	
 	public ShipmentEntity parse(ShipmentModel source) {

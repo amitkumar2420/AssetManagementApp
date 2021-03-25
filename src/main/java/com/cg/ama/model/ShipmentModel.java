@@ -42,14 +42,8 @@ public class ShipmentModel {
 	}
 
 	
-	public ShipmentModel(long shipmentId,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") long assetId,
-			@NotNull(message = "User ID cannot be null") @NotBlank(message = "user ID cannot be blank") long userId,
-			@NotNull(message = "Status cannot be null") @NotBlank(message = "Status cannot be blank") String status,
-			@NotNull(message = "Source Warehouse ID cannot be null") @NotBlank(message = "Source Warehouse ID cannot be blank") long sourceWhId,
-			@NotNull(message = "Destination Warehouse ID cannot be null") @NotBlank(message = "Destination Warehouse ID cannot be blank") long destWhId,
-			@NotNull(message = "Shipment Date cannot be null") @NotBlank(message = "Shipment Date cannot be blank") LocalDate shipmentDate,
-			@NotNull(message = "Delivery Date cannot be null") @NotBlank(message = "Delivery Date cannot be blank") LocalDate deliveryDate) {
+	public ShipmentModel(long shipmentId, long assetId, long userId, String status, 
+			long sourceWhId,long destWhId, LocalDate shipmentDate, LocalDate deliveryDate) {
 		super();
 		this.shipmentId = shipmentId;
 		this.assetId = assetId;
@@ -63,13 +57,8 @@ public class ShipmentModel {
 
 
 	public ShipmentModel(
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") long assetId,
-			@NotNull(message = "User ID cannot be null") @NotBlank(message = "user ID cannot be blank") long userId,
-			@NotNull(message = "Status cannot be null") @NotBlank(message = "Status cannot be blank") String status,
-			@NotNull(message = "Source Warehouse ID cannot be null") @NotBlank(message = "Source Warehouse ID cannot be blank") long sourceWhId,
-			@NotNull(message = "Destination Warehouse ID cannot be null") @NotBlank(message = "Destination Warehouse ID cannot be blank") long destWhId,
-			@NotNull(message = "Shipment Date cannot be null") @NotBlank(message = "Shipment Date cannot be blank") LocalDate shipmentDate,
-			@NotNull(message = "Delivery Date cannot be null") @NotBlank(message = "Delivery Date cannot be blank") LocalDate deliveryDate) {
+			long assetId, long userId, String status, long sourceWhId,long destWhId, 
+			LocalDate shipmentDate, LocalDate deliveryDate) {
 		super();
 		this.assetId = assetId;
 		this.userId = userId;
@@ -138,6 +127,12 @@ public class ShipmentModel {
 
 	public long getShipmentId() {
 		return shipmentId;
+	}
+
+
+	public static Long getshipmentId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -3,16 +3,13 @@ package com.cg.ama.model;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.cg.ama.entity.AssetType;
-import com.cg.ama.entity.WarehouseEntity;
-
 public class AssetModel {
 
 	private Long assetId;
 	
 	@NotNull(message="Warehouse ID cannot be null")	
 	@NotBlank(message="Warehouse ID cannot be blank")
-	private WarehouseEntity warehouse;
+	private WarehouseModel warehouse;
 	
 	@NotNull(message="Asset ID cannot be null")	
 	@NotBlank(message="Asset ID cannot be blank")
@@ -20,7 +17,7 @@ public class AssetModel {
 	
 	@NotNull(message="Asset ID cannot be null")	
 	@NotBlank(message="Asset ID cannot be blank")
-	private AssetType type;
+	private String type;
 	
 	@NotNull(message="Asset ID cannot be null")	
 	@NotBlank(message="Asset ID cannot be blank")
@@ -29,11 +26,11 @@ public class AssetModel {
 	public AssetModel() {
 		super();
 	}
-
+	
 	public AssetModel(Long assetId,
-			@NotNull(message = "Warehouse ID cannot be null") @NotBlank(message = "Warehouse ID cannot be blank") WarehouseEntity warehouse,
+			@NotNull(message = "Warehouse ID cannot be null") @NotBlank(message = "Warehouse ID cannot be blank") WarehouseModel warehouse,
 			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String model,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") AssetType type,
+			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String type,
 			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String manufacturer) {
 		super();
 		this.assetId = assetId;
@@ -43,10 +40,11 @@ public class AssetModel {
 		this.manufacturer = manufacturer;
 	}
 
+
 	public AssetModel(
-			@NotNull(message = "Warehouse ID cannot be null") @NotBlank(message = "Warehouse ID cannot be blank") WarehouseEntity warehouse,
+			@NotNull(message = "Warehouse ID cannot be null") @NotBlank(message = "Warehouse ID cannot be blank") WarehouseModel warehouse,
 			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String model,
-			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") AssetType type,
+			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String type,
 			@NotNull(message = "Asset ID cannot be null") @NotBlank(message = "Asset ID cannot be blank") String manufacturer) {
 		super();
 		this.warehouse = warehouse;
@@ -55,11 +53,13 @@ public class AssetModel {
 		this.manufacturer = manufacturer;
 	}
 
-	public WarehouseEntity getWarehouse() {
+
+
+	public WarehouseModel getWarehouse() {
 		return warehouse;
 	}
 
-	public void setWarehouse(WarehouseEntity warehouse) {
+	public void setWarehouse(WarehouseModel warehouse) {
 		this.warehouse = warehouse;
 	}
 
@@ -71,11 +71,11 @@ public class AssetModel {
 		this.model = model;
 	}
 
-	public AssetType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(AssetType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

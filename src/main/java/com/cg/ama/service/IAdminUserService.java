@@ -7,8 +7,9 @@ import com.cg.ama.exception.UserNotFoundException;
 import com.cg.ama.model.UserModel;
 
 public interface IAdminUserService {
-	UserModel getUserById(Long id) throws UserNotFoundException;
-	UserModel addUser(UserModel user) throws DuplicateEntryException;
+	UserModel getUserById(Long userId) throws UserNotFoundException;
+	UserModel addUser(UserModel userModel) throws DuplicateEntryException;
 	List<UserModel> getUsers() throws UserNotFoundException;
-	String deleteUserById(Long id) throws UserNotFoundException;
+	UserModel modifyUser(Long userId, UserModel userModel) throws UserNotFoundException;
+	String deleteUserById(Long userId) throws UserNotFoundException;
 }

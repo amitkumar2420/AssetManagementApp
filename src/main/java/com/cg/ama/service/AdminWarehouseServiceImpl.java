@@ -1,5 +1,76 @@
 package com.cg.ama.service;
 
-public class AdminWarehouseServiceImpl {
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.ama.exception.DuplicateEntryException;
+import com.cg.ama.exception.WarehouseNotFoundException;
+import com.cg.ama.model.WarehouseModel;
+import com.cg.ama.repo.WarehouseRepo;
+
+@Service
+public class AdminWarehouseServiceImpl implements IAdminWarehouseService {
+	
+	@Autowired
+	private EMParser parser;
+	
+	@Autowired
+	private WarehouseRepo warehouseRepo;
+	
+	@Override
+	public WarehouseModel getWareHouseById(Long warehouseId) throws WarehouseNotFoundException {
+		if (!warehouseRepo.existsById(warehouseId)) {
+			throw new WarehouseNotFoundException("No Warehouse present with the given ID");
+		}
+		return parser.parse((warehouseRepo.findById(warehouseId).orElse(null)));
+	}
+	
+	@Transactional
+	@Override
+	public WarehouseModel addWarehouse(WarehouseModel wareHouseModel) throws DuplicateEntryException {
+		if(wareHouseModel != null) {
+			if (warehouseRepo.existsById(wareHouseModel.getWhId())) {
+				throw new DuplicateEntryException("Warehouse already present in DB.");
+			}
+			wareHouseModel = parser.parse((warehouseRepo.save(parser.parse(wareHouseModel))));
+		}
+		return wareHouseModel;
+	}
+
+	@Override
+	public List<WarehouseModel> getWarehouseList() throws WarehouseNotFoundException {
+		if (warehouseRepo.count() == 0) {
+			throw new WarehouseNotFoundException("No Warehouse present with the given ID");
+		}
+		return warehouseRepo.findAll().stream().map(parser::parse).collect(Collectors.toList());
+	}
+	
+	@Transactional
+	@Override
+	public WarehouseModel modifyWarehouse(Long warehouseId, WarehouseModel wareHouseModel)
+			throws WarehouseNotFoundException {
+		if(wareHouseModel != null) {
+			if (!warehouseRepo.existsById(warehouseId)) {
+				throw new WarehouseNotFoundException("Warehouse Not present in DB.");
+			}
+			wareHouseModel = parser.parse((warehouseRepo.save(parser.parse(wareHouseModel))));
+		}
+		return wareHouseModel;
+	}
+
+	@Override
+	public String deleteWarehouseById(Long warehouseId) throws WarehouseNotFoundException {
+		if (!warehouseRepo.existsById(warehouseId)) {
+			throw new WarehouseNotFoundException("No Warehouse present with the given ID");
+		}
+		warehouseRepo.deleteById(warehouseId);
+		return "User Deleted";
+	}
+
 
 }
