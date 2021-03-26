@@ -312,7 +312,28 @@ METHOD : GET
 URL : http://localhost:8090/admin/warehouses/get/all
 RESPONSE :
 ```json
-		
+[
+    {
+        "whId": 1,
+        "mgrId": 1,
+        "address": {
+            "location": "Chennai",
+            "subLocation": "Velacherry",
+            "state": "Tamil Nadu",
+            "country": "India"
+        }
+    },
+    {
+        "whId": 2,
+        "mgrId": 2,
+        "address": {
+            "location": "Kochi",
+            "subLocation": "Ernalkulam",
+            "state": "Kerala",
+            "country": "India"
+        }
+    },
+]		
 ```
 RESPONSE CODE: 200 OK
 
@@ -323,11 +344,26 @@ METHOD : POST
 URL : http://localhost:8090/admin/warehouses
 REQUEST BODY : POST
 ```json
-		
+{
+        "mgrId": 1,
+        "address": {
+            "location": "Chennai",
+            "subLocation": "Velacherry",
+            "state": "Tamil Nadu",
+            "country": "India"
+        }				
 ```
 RESPONSE :
 ```json
-		
+{
+        "whId": 1,
+        "mgrId": 1,
+        "address": {
+            "location": "Chennai",
+            "subLocation": "Velacherry",
+            "state": "Tamil Nadu",
+            "country": "India"
+        }			
 ```
 		
 RESPONSE CODE: 201 CREATED
@@ -339,11 +375,25 @@ METHOD : PUT
 URL : http://localhost:8090/admin/warehouses/modify/7
 REQUEST BODY :
 ```json
-		
+{
+        "mgrId": 7,
+        "address": {
+            "location": "Chennai",
+            "subLocation": "Guindy",
+            "state": "Tamil Nadu",
+            "country": "India"
+        }		
 ```
 RESPONSE :
 ```json
-		
+{
+        "mgrId": 7,
+        "address": {
+            "location": "Chennai",
+            "subLocation": "Guindy",
+            "state": "Tamil Nadu",
+            "country": "India"
+        }			
 ```
 		
 RESPONSE CODE: 200 OK
@@ -360,9 +410,6 @@ Warehouse Deleted
 RESPONSE CODE:
 
 
-#### To-Do
-- [ ] getAssetsByWarehouseId
-
 ### Shipment
 SNo : 1
 Name : getShipmentById
@@ -370,33 +417,80 @@ METHOD : GET
 URL : http://localhost:8090/admin/shipments/get/1
 RESPONSE :
 ```json
-		
+{
+    "shipmentId": 5,
+    "assetId": 1,
+    "userId": 1,
+    "status": "DELIVERED",
+    "sourceWhId": 1,
+    "destWhId": 3,
+    "shipmentDate": "2021-08-27",
+    "deliveryDate": "2021-09-01"
+}		
 ```
 RESPONSE CODE: 200 OK
 
 
 SNo : 2
-Name : getAllWarehouses
+Name : getAllshipments
 METHOD : GET
 URL : http://localhost:8090/admin/shipments/get/all
 RESPONSE :
 ```json
-		
+[
+    {
+        "shipmentId": 6,
+        "assetId": 2,
+        "userId": 2,
+        "status": "DELIVERED",
+        "sourceWhId": 2,
+        "destWhId": 4,
+        "shipmentDate": "2021-09-01",
+        "deliveryDate": "2021-09-05"
+    },
+    {
+        "shipmentId": 7,
+        "assetId": 3,
+        "userId": 5,
+        "status": "DISPATCHED",
+        "sourceWhId": 1,
+        "destWhId": 3,
+        "shipmentDate": "2021-09-05",
+        "deliveryDate": "2021-09-10"
+    }
+]		
 ```
 RESPONSE CODE: 200 OK
 
 
 SNo : 3
-Name : createWarehouse
+Name : create Shipment
 METHOD : POST
 URL : http://localhost:8090/admin/shipments
 REQUEST BODY : POST
 ```json
-		
+{
+        "assetId": 2,
+        "userId": 2,
+        "status": "DELIVERED",
+        "sourceWhId": 2,
+        "destWhId": 4,
+        "shipmentDate": "2021-09-01",
+        "deliveryDate": "2021-09-05"
+    }		
 ```
 RESPONSE :
 ```json
-		
+{
+        "shipmentId": 6,
+        "assetId": 2,
+        "userId": 2,
+        "status": "DELIVERED",
+        "sourceWhId": 2,
+        "destWhId": 4,
+        "shipmentDate": "2021-09-01",
+        "deliveryDate": "2021-09-05"
+    }		
 ```
 		
 RESPONSE CODE: 201 CREATED
@@ -408,11 +502,27 @@ METHOD : PUT
 URL : http://localhost:8090/admin/shipments/modify/2
 REQUEST BODY :
 ```json
-		
+{
+        "assetId": 2,
+        "userId": 2,
+        "status": "DISPATCHED",
+        "sourceWhId": 2,
+        "destWhId": 4,
+        "shipmentDate": "2021-09-01",
+        "deliveryDate": "2021-09-05"
+    }		
 ```
 RESPONSE :
 ```json
-		
+{
+        "assetId": 2,
+        "userId": 2,
+        "status": "DISPATCHED",
+        "sourceWhId": 2,
+        "destWhId": 4,
+        "shipmentDate": "2021-09-01",
+        "deliveryDate": "2021-09-05"
+    }			
 ```
 		
 RESPONSE CODE: 200 OK
