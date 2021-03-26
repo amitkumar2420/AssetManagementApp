@@ -3,6 +3,7 @@ package com.cg.ama.model;
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 
 public class ShipmentModel {
@@ -25,10 +26,10 @@ public class ShipmentModel {
 	@NotNull(message="Destination Warehouse ID cannot be null")	
 	private Long destWhId;
 	
+	@PastOrPresent(message="Enter a valid date")
 	@NotNull(message="Shipment Date cannot be null")	
 	private LocalDate shipmentDate;
 	
-	@NotNull(message="Delivery Date cannot be null")	
 	private LocalDate deliveryDate;
 	
 	public ShipmentModel() {
@@ -119,15 +120,11 @@ public class ShipmentModel {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public long getShipmentId() {
+	public Long getShipmentId() {
 		return shipmentId;
 	}
 
-
-	public static Long getshipmentId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+ 
 
 
 	

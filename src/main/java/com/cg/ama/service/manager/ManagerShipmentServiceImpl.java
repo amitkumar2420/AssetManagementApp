@@ -1,28 +1,24 @@
-package com.cg.ama.service.admin;
+package com.cg.ama.service.manager;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.ama.exception.DuplicateEntryException;
 import com.cg.ama.exception.ShipmentNotFoundException;
 import com.cg.ama.model.ShipmentModel;
 import com.cg.ama.repo.ShipmentRepo;
-
+import com.cg.ama.service.admin.EMParser;
 
 @Service
-public class AdminShipmentServiceImpl implements IAdminShipmentService {
+public class ManagerShipmentServiceImpl implements IManagerShipmentService {
 	
 	@Autowired
 	private EMParser parser;
 	
 	@Autowired
 	private ShipmentRepo shipmentRepo;
-
 	
 	@Override
 	public ShipmentModel getShipmentById(Long shipmentId) throws ShipmentNotFoundException {
@@ -32,18 +28,6 @@ public class AdminShipmentServiceImpl implements IAdminShipmentService {
 		return parser.parse((shipmentRepo.findById(shipmentId).orElse(null)));
 	}
 
-	@Transactional
-	@Override
-	public ShipmentModel addShipment(ShipmentModel shipmentModel) throws DuplicateEntryException {
-		if(shipmentModel != null) {
-			if (shipmentRepo.existsById(shipmentModel.getShipmentId())) {
-				throw new DuplicateEntryException("Shipment already present in DB.");
-			}
-			System.out.println(shipmentModel.toString());
-			shipmentModel = parser.parse((shipmentRepo.save(parser.parse(shipmentModel))));
-		}
-		return shipmentModel;
-	}
 
 	@Override
 	public List<ShipmentModel> getShipments() throws ShipmentNotFoundException {
@@ -53,7 +37,6 @@ public class AdminShipmentServiceImpl implements IAdminShipmentService {
 		return shipmentRepo.findAll().stream().map(parser::parse).collect(Collectors.toList());
 	}
 	
-	@Transactional
 	@Override
 	public ShipmentModel modifyShipment(Long shipmentId, ShipmentModel shipmentModel) throws ShipmentNotFoundException {
 		if(shipmentModel != null) {
@@ -63,24 +46,6 @@ public class AdminShipmentServiceImpl implements IAdminShipmentService {
 			shipmentModel = parser.parse((shipmentRepo.save(parser.parse(shipmentModel))));
 		}
 		return shipmentModel;
-	}
-
-	@Override
-	public String deleteShipmentById(Long shipmentId) throws ShipmentNotFoundException {
-		if (!shipmentRepo.existsById(shipmentId)) {
-			throw new ShipmentNotFoundException("No Shipment present with the given ID");
-		}
-		shipmentRepo.deleteById(shipmentId);
-		return "Shipment Deleted";
-	}
-
-	@Override
-	public String modifyShipmentStatus(Long shipmentId) throws ShipmentNotFoundException {
-		if (!shipmentRepo.existsById(shipmentId)) {
-			throw new ShipmentNotFoundException("No Shipment present with the given ID");
-		}
-		shipmentRepo.setDeliveryStatus(shipmentId);;
-		return "Shipment Status set to DELIVERED";
 	}
 
 

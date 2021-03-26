@@ -131,6 +131,67 @@ public class ShipmentEntity {
 	public long getAssetId() {
 		return assetId;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ShipmentEntity [shipmentId=" + shipmentId + ", assetId=" + assetId + ", userId=" + userId + ", status="
+				+ status + ", sourceWhId=" + sourceWhId + ", destWhId=" + destWhId + ", shipmentDate=" + shipmentDate
+				+ ", deliveryDate=" + deliveryDate + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (assetId ^ (assetId >>> 32));
+		result = prime * result + ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
+		result = prime * result + (int) (destWhId ^ (destWhId >>> 32));
+		result = prime * result + ((shipmentDate == null) ? 0 : shipmentDate.hashCode());
+		result = prime * result + (int) (shipmentId ^ (shipmentId >>> 32));
+		result = prime * result + (int) (sourceWhId ^ (sourceWhId >>> 32));
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + (int) (userId ^ (userId >>> 32));
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShipmentEntity other = (ShipmentEntity) obj;
+		if (assetId != other.assetId)
+			return false;
+		if (deliveryDate == null) {
+			if (other.deliveryDate != null)
+				return false;
+		} else if (!deliveryDate.equals(other.deliveryDate))
+			return false;
+		if (destWhId != other.destWhId)
+			return false;
+		if (shipmentDate == null) {
+			if (other.shipmentDate != null)
+				return false;
+		} else if (!shipmentDate.equals(other.shipmentDate))
+			return false;
+		if (shipmentId != other.shipmentId)
+			return false;
+		if (sourceWhId != other.sourceWhId)
+			return false;
+		if (status != other.status)
+			return false;
+		if (userId != other.userId)
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 }

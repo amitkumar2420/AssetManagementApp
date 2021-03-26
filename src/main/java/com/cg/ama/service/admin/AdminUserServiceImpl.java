@@ -7,10 +7,12 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.cg.ama.exception.DuplicateEntryException;
 import com.cg.ama.exception.UserNotFoundException;
 import com.cg.ama.model.UserModel;
 import com.cg.ama.repo.UserRepo;
+
 
 @Service
 public class AdminUserServiceImpl implements IAdminUserService {
@@ -65,10 +67,15 @@ public class AdminUserServiceImpl implements IAdminUserService {
 		if(userModel != null) {
 			if (!userRepo.existsById(userId)) {
 				throw new UserNotFoundException("User Not present in DB.");
-			}
-			userModel = parser.parse((userRepo.save(parser.parse(userModel))));
+			}			
 		}
-		return userModel;
+		
+		UserModel user = parser.parse(userRepo.getOne(userId));
+		user.setUserName(userModel.getUserName());
+		user.setUserPassword(userModel.getUserPassword());
+		user.setUserType(userModel.getUserType());
+		return parser.parse(userRepo.save(parser.parse(user)));
+				
 	}
 
 }

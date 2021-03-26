@@ -13,6 +13,7 @@ import com.cg.ama.exception.DuplicateEntryException;
 import com.cg.ama.model.AssetModel;
 import com.cg.ama.repo.AssetRepo;
 
+
 @Service
 public class AdminAssetServiceImpl implements IAdminAssetService{
 	
@@ -35,7 +36,7 @@ public class AdminAssetServiceImpl implements IAdminAssetService{
 	public AssetModel addAsset(AssetModel assetModel) throws DuplicateEntryException {
 		if(assetModel != null) {
 			if (assetRepo.existsById(assetModel.getAssetId())) {
-				throw new DuplicateEntryException("User already present in DB.");
+				throw new DuplicateEntryException("Asset already present in DB.");
 			}
 			assetModel = parser.parse((assetRepo.save(parser.parse(assetModel))));
 		}
@@ -70,6 +71,16 @@ public class AdminAssetServiceImpl implements IAdminAssetService{
 		}
 		return assetModel;
 	}
+
+//	@Override
+//	public void changeWarehouseId(Long assetId, Long warehouseId) throws AssetNotFoundException, WarehouseNotFoundException {
+//			if (!assetRepo.existsById(assetId)) {
+//				throw new AssetNotFoundException("Asset Not present in DB.");
+//			}
+//			 AssetModel assetModel = parser.parse(assetRepo.getOne(assetId));
+//			 assetModel.setWarehouse(new AdminWarehouseServiceImpl().getWareHouseById(warehouseId));
+//			 assetRepo.save(parser.parse(assetModel));
+//		}
 
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.ama.exception.AssetNotFoundException;
@@ -34,6 +36,7 @@ import com.cg.ama.service.admin.IAdminAssetService;
 import com.cg.ama.service.admin.IAdminShipmentService;
 import com.cg.ama.service.admin.IAdminUserService;
 import com.cg.ama.service.admin.IAdminWarehouseService;
+import com.cg.ama.service.report.IReportService;
 
 @RestController
 @CrossOrigin
@@ -55,7 +58,7 @@ public class AdminRestController {
 	// --------------------------------------  USERS -------------------------------------------------
 	
 	@GetMapping("/users/get/{userId}")
-	public ResponseEntity<UserModel> getUsersByCode(@PathVariable("userId") Long userId) throws UserNotFoundException{
+	public ResponseEntity<UserModel> getUsersById(@PathVariable("userId") Long userId) throws UserNotFoundException{
 		return ResponseEntity.ok(adminUserService.getUserById((userId)));
 	}
 	
@@ -65,16 +68,15 @@ public class AdminRestController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<UserModel> createUser(@RequestBody @Valid UserModel userModel, BindingResult result) throws InvalidUserDetailsException, DuplicateEntryException {
+	public ResponseEntity<String> createUser(@RequestBody @Valid UserModel userModel, BindingResult result) throws InvalidUserDetailsException, DuplicateEntryException {
 		
 		if (result.hasErrors()) {
 			throw new InvalidUserDetailsException("Not Created");
 		}
-		
-		return ResponseEntity.ok(adminUserService.addUser(userModel));
+		UserModel userModel1 = adminUserService.addUser(userModel);
+		return new ResponseEntity<String>("User "+ userModel1.getUserId() +" Created", HttpStatus.CREATED);
 	}
 	
-	// TO-DO
 	@PutMapping("/users/modify/{userId}")
 	public ResponseEntity<UserModel> modifyUser(
 			@PathVariable("userId") Long userId,
@@ -96,7 +98,7 @@ public class AdminRestController {
 	// ---------------------------------------------- ASSET   -----------------------------------------------
 	
 	@GetMapping("/assets/get/{assetId}")
-	public ResponseEntity<AssetModel> getAssetsByCode(@PathVariable("assetId") Long assetId) throws AssetNotFoundException{
+	public ResponseEntity<AssetModel> getAssetsById(@PathVariable("assetId") Long assetId) throws AssetNotFoundException{
 		return ResponseEntity.ok(adminAssetService.getAssetById((assetId)));
 	}
 	
@@ -119,7 +121,7 @@ public class AdminRestController {
 	
 	@PutMapping("/assets/modify/{assetId}")
 	public ResponseEntity<AssetModel> modifyAsset (
-			@PathVariable("AssetId") Long userId,
+			@PathVariable("assetId") Long assetId,
 			@RequestBody @Valid AssetModel assetModel,
 			BindingResult result)  throws InvalidAssetDetailsException, DuplicateEntryException, AssetNotFoundException {
 		
@@ -127,7 +129,7 @@ public class AdminRestController {
 			throw new InvalidAssetDetailsException("Not Created");
 		}
 		
-		return ResponseEntity.ok(adminAssetService.modifyAsset(userId, assetModel));
+		return ResponseEntity.ok(adminAssetService.modifyAsset(assetId, assetModel));
 	}
 	
 	@DeleteMapping("/assets/delete/{assetId}")
@@ -138,7 +140,7 @@ public class AdminRestController {
 	// ---------------------------------------------- WAREHOUSE   -----------------------------------------------
 	
 	@GetMapping("/warehouses/get/{warehouseId}")
-	public ResponseEntity<WarehouseModel> getWarehouseByCode(@PathVariable("warehouseId") Long warehouseId) throws WarehouseNotFoundException{
+	public ResponseEntity<WarehouseModel> getWarehouseById(@PathVariable("warehouseId") Long warehouseId) throws WarehouseNotFoundException{
 		return ResponseEntity.ok(adminWarehouseService.getWareHouseById(warehouseId));
 	}
 	
@@ -178,7 +180,7 @@ public class AdminRestController {
 	// ---------------------------------------------- SHIPMENT   -----------------------------------------------
 		
 	@GetMapping("/shipments/get/{shipmentId}")
-	public ResponseEntity<ShipmentModel> getShipmentByCode(@PathVariable("shipmentId") Long shipmentId) throws ShipmentNotFoundException {
+	public ResponseEntity<ShipmentModel> getShipmentById(@PathVariable("shipmentId") Long shipmentId) throws ShipmentNotFoundException {
 		return ResponseEntity.ok(adminShipmentService.getShipmentById(shipmentId));
 	}
 		
@@ -188,7 +190,8 @@ public class AdminRestController {
 	}
 		
 	@PostMapping("/shipments")
-	public ResponseEntity<ShipmentModel> createShipment(@RequestBody @Valid ShipmentModel shipmentModel, BindingResult result) throws InvalidShipmentDetailsException, DuplicateEntryException {
+	public ResponseEntity<ShipmentModel> createShipment(@RequestBody @Valid ShipmentModel shipmentModel, BindingResult result) throws InvalidShipmentDetailsException
+							, DuplicateEntryException, AssetNotFoundException, WarehouseNotFoundException {
 			
 		if (result.hasErrors()) {
 			throw new InvalidShipmentDetailsException("Not Created");
@@ -215,5 +218,40 @@ public class AdminRestController {
 		return ResponseEntity.ok(adminShipmentService.deleteShipmentById(shipmentId));
 						
 	}
+	
+	@GetMapping("/shipments/status/delivered")
+	public ResponseEntity<String> setStatus(@RequestParam(name = "shipmentId") Long shipmentId) throws ShipmentNotFoundException  {
+		return ResponseEntity.ok(adminShipmentService.modifyShipmentStatus(shipmentId));
+	}
+	
+	
+	// ------------------------------------------- REPORT --------------------------------------------------
+	
+	@Autowired
+	IReportService reportService;
+	
+	@GetMapping("/shipments/report/month")
+	public ResponseEntity<List<ShipmentModel>> getReport(@RequestParam(name = "month") int month, @RequestParam(name = "year") int year)  {
+		return ResponseEntity.ok(reportService.getShipmentsByMonth(month, year));
+	}
+	
+	@GetMapping("/shipments/report/week")
+	public ResponseEntity<List<ShipmentModel>> getReportByWeek(
+			@RequestParam(name = "week") int week,
+			@RequestParam(name = "month") int month,
+			@RequestParam(name = "year") int year)  {
+		return ResponseEntity.ok(reportService.getShipmentsByWeek(week, month, year));
+	}
+	
+	@GetMapping("/shipments/report/weekly")
+	public ResponseEntity<List<ShipmentModel>> findAllByWeekly(){
+		return ResponseEntity.ok(reportService.findAllByWeekly());
+	}
+	
+	@GetMapping("/shipments/report/general/monthly")
+	public ResponseEntity<List<ShipmentModel>> findAllByMonthly(){
+		return ResponseEntity.ok(reportService.findAllByMonthly());
+	}
+	
 	
 }

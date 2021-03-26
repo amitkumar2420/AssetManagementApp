@@ -8,10 +8,16 @@ import com.cg.ama.model.AssetModel;
 
 
 public interface IAdminAssetService {
+	
 	AssetModel getAssetById(Long assetId) throws AssetNotFoundException;
+	
 	AssetModel addAsset(AssetModel assetModel) throws DuplicateEntryException;
+	
 	List<AssetModel> getAssetList() throws AssetNotFoundException;
+	
 	AssetModel modifyAsset(Long assetId, AssetModel assetModel) throws AssetNotFoundException;
+	
 	String deleteAssetById(Long assetId) throws AssetNotFoundException;
+//	void changeWarehouseId(Long assetId, Long warehouseId) throws AssetNotFoundException, WarehouseNotFoundException;
 	
 }

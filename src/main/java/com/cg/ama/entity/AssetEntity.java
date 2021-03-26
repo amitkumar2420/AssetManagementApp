@@ -90,6 +90,14 @@ public class AssetEntity {
 	public Long getAssetId() {
 		return assetId;
 	}
+
+
+	@Override
+	public String toString() {
+		return "AssetEntity [assetId=" + assetId + ", warehouse=" + warehouse + ", model=" + model + ", type=" + type
+				+ ", manufacturer=" + manufacturer + "]";
+	}
+	
 	
 	
 }

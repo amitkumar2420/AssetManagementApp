@@ -1,7 +1,6 @@
 package com.cg.ama.service.admin;
 
 import org.springframework.stereotype.Service;
-
 import com.cg.ama.entity.AddressEntity;
 import com.cg.ama.entity.AssetEntity;
 import com.cg.ama.entity.AssetType;
@@ -23,24 +22,28 @@ public class EMParser {
 	
 	public WarehouseEntity parse(WarehouseModel source) {
 		return source==null?null:
-			new WarehouseEntity( source.getWhId(), source.getMgrId(), new AddressEntity(source.getAddress().getLocation(),source.getAddress().getSubLocation()
+			new WarehouseEntity( source.getWhId(), source.getMgrId(),
+					new AddressEntity(source.getAddress().getLocation(),source.getAddress().getSubLocation()
 					, source.getAddress().getState(), source.getAddress().getCountry()));
 	}
 	
 	public WarehouseModel parse(WarehouseEntity source) {
 		return source==null?null:
-			new WarehouseModel(source.getWhId(), source.getMgrId(), new AddressModel(source.getAddress().getLocation(),source.getAddress().getSubLocation()
+			new WarehouseModel(source.getWhId(), source.getMgrId(),
+					new AddressModel(source.getAddress().getLocation(),source.getAddress().getSubLocation()
 					, source.getAddress().getState(), source.getAddress().getCountry()));
 	}
 	
 	public UserEntity parse(UserModel source) {
 		return source==null?null:
-			new UserEntity(source.getUserId(), source.getUserName(), source.getUserPassword(), UserType.valueOf(source.getUserType()));
+			new UserEntity(source.getUserId(), source.getUserName(),
+					source.getUserPassword(), UserType.valueOf(source.getUserType()));
 	}
 	
 	public UserModel parse(UserEntity source) {
 		return source==null?null:
-			new UserModel(source.getUserId(), source.getUserName(), source.getUserPassword(), String.valueOf(source.getUserType()));
+			new UserModel(source.getUserId(), source.getUserName(),
+					source.getUserPassword(), String.valueOf(source.getUserType()));
 	}
 	
 	public AssetEntity parse(AssetModel source) {
@@ -61,14 +64,16 @@ public class EMParser {
 	
 	public ShipmentEntity parse(ShipmentModel source) {
 		return source==null?null:
-			new ShipmentEntity(source.getShipmentId(), source.getAssetId(), source.getUserId(), ShipmentStatus.valueOf(source.getStatus()), source.getSourceWhId(),
-					source.getDestWhId(), source.getShipmentDate(), source.getDeliveryDate());
+			new ShipmentEntity(source.getShipmentId(), source.getAssetId(), source.getUserId(),
+					ShipmentStatus.valueOf(source.getStatus()), source.getSourceWhId(),
+						source.getDestWhId(), source.getShipmentDate(), source.getDeliveryDate());
 	}
 	
 	public ShipmentModel parse(ShipmentEntity source) {
 		return source==null?null:
-			new ShipmentModel(source.getShipmentId(), source.getAssetId(), source.getUserId(), String.valueOf(source.getStatus()), source.getSourceWhId(),
-					source.getDestWhId(), source.getShipmentDate(), source.getDeliveryDate());
+			new ShipmentModel(source.getShipmentId(), source.getAssetId(), source.getUserId(),
+					String.valueOf(source.getStatus()), source.getSourceWhId(),
+					  source.getDestWhId(), source.getShipmentDate(), source.getDeliveryDate());
 	}
 	
 	
