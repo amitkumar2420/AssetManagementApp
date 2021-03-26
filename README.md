@@ -165,7 +165,7 @@ RESPONSE :
  "assetId": 7,
  "warehouse": {
  "whId": 1,
- "mgrId": 1,asset
+ "mgrId": 1,
  "address": {
  "location": "Chennai",
  "subLocation": "Velacherry",
