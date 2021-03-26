@@ -49,5 +49,16 @@ public class ManagerShipmentServiceImpl implements IManagerShipmentService {
 	}
 
 
+	@Override
+	public String modifyShipmentStatus(Long shipmentId) throws ShipmentNotFoundException {
+		if (!shipmentRepo.existsById(shipmentId)) {
+			throw new ShipmentNotFoundException("No Shipment present with the given ID");
+		}
+		shipmentRepo.setDeliveryStatus(shipmentId);;
+		return "Shipment Status set to DELIVERED";
+	}
+
+
+
 
 }

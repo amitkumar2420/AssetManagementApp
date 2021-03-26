@@ -29,20 +29,24 @@ public class ReportServiceImpl implements IReportService {
 		switch (week) {
 		case 1:
 			endDate = startDate.plusDays(6);
+			break;
 		case 2:
 			startDate = startDate.plusWeeks(1);
 			endDate = startDate.plusDays(6);
+			break;
 		case 3:
 			startDate = startDate.plusWeeks(2);
 			endDate = startDate.plusDays(6);
+			break;
 		case 4:
 			startDate = startDate.plusWeeks(3);
 			endDate = startDate.plusDays(6);
+			break;
 		default:
 			endDate = startDate.plusDays(6);
+			break;
 		}
 		
-		System.out.println(String.valueOf(startDate) + "   " +  String.valueOf(endDate));
 		return shipmentRepo.getShipmentsInfo(startDate, endDate).stream().map(parser::parse).collect(Collectors.toList());
 	}
 

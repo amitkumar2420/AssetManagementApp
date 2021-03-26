@@ -38,8 +38,8 @@ import com.cg.ama.service.admin.IAdminUserService;
 import com.cg.ama.service.admin.IAdminWarehouseService;
 import com.cg.ama.service.report.IReportService;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/admin")
 public class AdminRestController {
 	
@@ -54,6 +54,7 @@ public class AdminRestController {
 	
 	@Autowired
 	private IAdminWarehouseService adminWarehouseService;
+	
 	
 	// --------------------------------------  USERS -------------------------------------------------
 	
@@ -123,7 +124,7 @@ public class AdminRestController {
 	public ResponseEntity<AssetModel> modifyAsset (
 			@PathVariable("assetId") Long assetId,
 			@RequestBody @Valid AssetModel assetModel,
-			BindingResult result)  throws InvalidAssetDetailsException, DuplicateEntryException, AssetNotFoundException {
+			BindingResult result)  throws InvalidAssetDetailsException, AssetNotFoundException {
 		
 		if (result.hasErrors()) {
 			throw new InvalidAssetDetailsException("Not Created");
@@ -159,11 +160,16 @@ public class AdminRestController {
 		return ResponseEntity.ok(adminWarehouseService.addWarehouse(warehouseModel));
 	}
 	
+	@GetMapping("/warehouses/get/assets/{warehouseId}")
+	public ResponseEntity<List<AssetModel>> getAllAssetsFromWarehouse(@PathVariable("warehouseId") Long warehouseId) throws WarehouseNotFoundException{
+		return ResponseEntity.ok(adminWarehouseService.getAllAssets(warehouseId));
+	}
+	
 	@PutMapping("/warehouses/modify/{warehouseId}")
 	public ResponseEntity<WarehouseModel> modifyAsset (
 			@PathVariable("warehouseId") Long warehouseId,
 			@RequestBody @Valid WarehouseModel warehouseModel,
-			BindingResult result)  throws InvalidWarehouseDetailsException, DuplicateEntryException, WarehouseNotFoundException {
+			BindingResult result)  throws InvalidWarehouseDetailsException, WarehouseNotFoundException {
 		
 		if (result.hasErrors()) {
 			throw new InvalidWarehouseDetailsException("Not Created");
@@ -175,7 +181,7 @@ public class AdminRestController {
 	@DeleteMapping("/warehouses/delete/{warehouseId}")
 	public ResponseEntity<String> deleteWarehouseById(@PathVariable("warehouseId") Long warehouseId) throws WarehouseNotFoundException {
 		return ResponseEntity.ok(adminWarehouseService.deleteWarehouseById(warehouseId));
-	};
+	}
 		
 	// ---------------------------------------------- SHIPMENT   -----------------------------------------------
 		
@@ -204,7 +210,7 @@ public class AdminRestController {
 	public ResponseEntity<ShipmentModel> modifyShipment (
 			@PathVariable("shipmentId") Long shipmentId,
 			@RequestBody @Valid ShipmentModel shipmentModel,
-			BindingResult result)  throws InvalidShipmentDetailsException, DuplicateEntryException, ShipmentNotFoundException {
+			BindingResult result)  throws InvalidShipmentDetailsException, ShipmentNotFoundException {
 		
 		if (result.hasErrors()) {
 			throw new InvalidShipmentDetailsException("Not Created");

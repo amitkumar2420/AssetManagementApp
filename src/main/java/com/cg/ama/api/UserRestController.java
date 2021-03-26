@@ -17,9 +17,8 @@ import com.cg.ama.model.ShipmentModel;
 import com.cg.ama.service.user.IUserAssetService;
 import com.cg.ama.service.user.IUserShipmentService;
 
-
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/user")
 public class UserRestController {
 	

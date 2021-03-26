@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.cg.ama.exception.DuplicateEntryException;
 import com.cg.ama.exception.WarehouseNotFoundException;
+import com.cg.ama.model.AssetModel;
 import com.cg.ama.model.WarehouseModel;
+import com.cg.ama.repo.AssetRepo;
 import com.cg.ama.repo.WarehouseRepo;
 
 
@@ -22,6 +24,9 @@ public class AdminWarehouseServiceImpl implements IAdminWarehouseService {
 	
 	@Autowired
 	private WarehouseRepo warehouseRepo;
+	
+	@Autowired
+	private AssetRepo assetRepo;
 	
 	@Override
 	public WarehouseModel getWareHouseById(Long warehouseId) throws WarehouseNotFoundException {
@@ -71,6 +76,14 @@ public class AdminWarehouseServiceImpl implements IAdminWarehouseService {
 		}
 		warehouseRepo.deleteById(warehouseId);
 		return "Warehouse Deleted";
+	}
+
+	@Override
+	public List<AssetModel> getAllAssets(Long warehouseId) throws WarehouseNotFoundException {
+		if (!warehouseRepo.existsById(warehouseId)) {
+			throw new WarehouseNotFoundException("No Warehouse present with the given ID");
+		}
+		return assetRepo.getAssetsInWarehouse(warehouseId).stream().map(parser::parse).collect(Collectors.toList());
 	}
 
 

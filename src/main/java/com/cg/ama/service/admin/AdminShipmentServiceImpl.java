@@ -39,7 +39,6 @@ public class AdminShipmentServiceImpl implements IAdminShipmentService {
 			if (shipmentRepo.existsById(shipmentModel.getShipmentId())) {
 				throw new DuplicateEntryException("Shipment already present in DB.");
 			}
-			System.out.println(shipmentModel.toString());
 			shipmentModel = parser.parse((shipmentRepo.save(parser.parse(shipmentModel))));
 		}
 		return shipmentModel;
@@ -79,7 +78,7 @@ public class AdminShipmentServiceImpl implements IAdminShipmentService {
 		if (!shipmentRepo.existsById(shipmentId)) {
 			throw new ShipmentNotFoundException("No Shipment present with the given ID");
 		}
-		shipmentRepo.setDeliveryStatus(shipmentId);;
+		shipmentRepo.setDeliveryStatus(shipmentId);
 		return "Shipment Status set to DELIVERED";
 	}
 

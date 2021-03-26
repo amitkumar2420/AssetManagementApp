@@ -8,7 +8,11 @@ import com.cg.ama.model.ShipmentModel;
 public interface IManagerShipmentService {
 	
 	ShipmentModel getShipmentById(Long shipmentId) throws ShipmentNotFoundException;
+	
 	List<ShipmentModel> getShipments() throws ShipmentNotFoundException;
+	
 	ShipmentModel modifyShipment(Long shipmentId, ShipmentModel shipmentModel) throws ShipmentNotFoundException;
+	
+	String modifyShipmentStatus(Long shipmentId) throws ShipmentNotFoundException;
 
 }

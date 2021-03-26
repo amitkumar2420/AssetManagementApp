@@ -1,12 +1,10 @@
 package com.cg.ama.entity;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Embeddable
-@Table(name="addresses")
 public class AddressEntity {
 	
 	@NotNull

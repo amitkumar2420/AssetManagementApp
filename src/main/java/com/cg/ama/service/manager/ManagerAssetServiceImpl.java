@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.ama.exception.AssetNotFoundException;
+import com.cg.ama.exception.WarehouseNotFoundException;
 import com.cg.ama.model.AssetModel;
 import com.cg.ama.repo.AssetRepo;
+import com.cg.ama.repo.WarehouseRepo;
 import com.cg.ama.service.admin.EMParser;
 
 @Service
@@ -19,6 +21,9 @@ public class ManagerAssetServiceImpl implements IManagerAssetService {
 	
 	@Autowired
 	private AssetRepo assetRepo;
+	
+	@Autowired
+	private WarehouseRepo warehouseRepo;
 
 	@Override
 	public AssetModel getAssetById(long assetId) throws AssetNotFoundException {
@@ -45,6 +50,14 @@ public class ManagerAssetServiceImpl implements IManagerAssetService {
 			assetModel = parser.parse((assetRepo.save(parser.parse(assetModel))));
 		}
 		return assetModel;
+	}
+
+	@Override
+	public List<AssetModel> getAllAssets(Long warehouseId) throws WarehouseNotFoundException {
+		if (!warehouseRepo.existsById(warehouseId)) {
+			throw new WarehouseNotFoundException("No Warehouse present with the given ID");
+		}
+		return assetRepo.getAssetsInWarehouse(warehouseId).stream().map(parser::parse).collect(Collectors.toList());
 	}
 
 

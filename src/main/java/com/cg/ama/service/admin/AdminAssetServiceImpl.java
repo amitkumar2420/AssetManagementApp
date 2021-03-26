@@ -72,15 +72,5 @@ public class AdminAssetServiceImpl implements IAdminAssetService{
 		return assetModel;
 	}
 
-//	@Override
-//	public void changeWarehouseId(Long assetId, Long warehouseId) throws AssetNotFoundException, WarehouseNotFoundException {
-//			if (!assetRepo.existsById(assetId)) {
-//				throw new AssetNotFoundException("Asset Not present in DB.");
-//			}
-//			 AssetModel assetModel = parser.parse(assetRepo.getOne(assetId));
-//			 assetModel.setWarehouse(new AdminWarehouseServiceImpl().getWareHouseById(warehouseId));
-//			 assetRepo.save(parser.parse(assetModel));
-//		}
-
 
 }
